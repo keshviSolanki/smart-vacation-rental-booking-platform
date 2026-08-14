@@ -1,0 +1,189 @@
+<style>
+  .btn-search {
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25rem;
+    padding: 0 1rem;
+  }
+
+  .btn-search:hover {
+    border: 2px solid #fe424d;
+  }
+
+  .btn-search i {
+    display: inline;
+    margin-right: 0.75rem;
+  }
+
+  .search-input {
+    border-radius: 25px;
+    padding: 0.5rem 3rem;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+  }
+
+  .search-input:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    border-color: #fe424d;
+  }
+
+  .wishlist-link {
+    text-decoration: none;
+    color: #fe424d !important;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+
+  .wishlist-link:hover {
+    color: #d6333c !important;
+  }
+
+  /* SEARCH SUGGESTION BOX */
+  #suggestions-box {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    z-index: 999;
+    max-height: 300px;
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+  }
+
+  .suggestion-item {
+    padding: 14px 18px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #222;
+    border-bottom: 1px solid #f1f1f1;
+    transition: 0.2s ease;
+  }
+
+  .suggestion-item:last-child {
+    border-bottom: none;
+  }
+
+  .suggestion-item:hover {
+    background-color: #f7f7f7;
+    color: #fe424d;
+    transform: translateX(6px);
+  }
+</style>
+
+<!-------- THEME CSS ---------->
+<link rel="stylesheet" href="/css/theme.css">
+
+<!-------- RAINY HEART THEME CSS ---------->
+<link rel="stylesheet" href="/css/rainyheart.css">
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">explore</a>
+      </div>
+
+      &nbsp; &nbsp; &nbsp;
+      <div class="navbar-nav ms-3">
+        <% if(typeof currUser !== "undefined" && currUser){ %>
+        <a class="nav-link wishlist-link" id="wishlistLink" href="/listings/wishlist">
+          ❤️ wishlist
+        </a>
+        <% } %>
+
+      </div>
+
+      &nbsp; &nbsp;
+      <button id="themeToggle" class="theme-btn">☀️</button>
+
+
+
+      <div class="navbar-nav ms-auto position-relative">
+        <form class="d-flex" action="/listings/search" role="search">
+          <input class="form-control me-2 search-input" id="search-input" name="q" type="search"
+            placeholder="Search destination" autocomplete="off" />
+          <button class="btn btn-search" type="submit"><i class="fa-brands fa-searchengin"></i>Search</button>
+        </form>
+        <div id="suggestions-box"></div>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">add new listings</a>
+        <% if(!currUser) { %>
+        <a class="nav-link" href="/signup"><b>sign-in</b></a>
+        <a class="nav-link" href="/login"><b>log-in</b></a>
+        <% } %>
+       <% if(typeof currUser !== "undefined" && currUser) { %>
+        <a class="nav-link" href="/logout"><b>log-out</b></a>
+        <% } %>
+
+        <% if(typeof currUser !== "undefined" && currUser){ %>
+
+        <a href="/profile" class="nav-link">
+          <i class="fa-solid fa-user"></i>
+        </a>
+
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!---------- JS FOR THEME ----------->
+<script src="/js/theme.js"></script>
+
+
+<!---------- JS FOR RAINY HEART THEME ----------->
+<script src="/js/rainyheart.js"></script>
+
+
+<script>
+  //suggestion box mate--------------------+-+-+-+-+-+-+
+
+  const searchInput = document.getElementById("search-input");
+  const suggestionsBox = document.getElementById("suggestions-box");
+
+  searchInput.addEventListener("keyup", async () => {
+
+    let query = searchInput.value;
+
+    if (query.length === 0) {
+      suggestionsBox.innerHTML = "";
+      return;
+    }
+
+    let response = await fetch(`/listings/suggestions?q=${query}`);
+
+    let suggestions = await response.json();
+
+    suggestionsBox.innerHTML = "";
+
+    suggestions.forEach((item) => {
+
+      let div = document.createElement("div");
+
+      div.classList.add("suggestion-item");
+
+      div.innerText = item;
+
+      div.addEventListener("click", () => {
+        searchInput.value = item;
+        suggestionsBox.innerHTML = "";
+      });
+
+      suggestionsBox.appendChild(div);
+    });
+
+  });
+</script>

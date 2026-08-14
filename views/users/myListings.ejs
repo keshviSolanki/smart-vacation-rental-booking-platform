@@ -1,0 +1,38 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+
+  <h2>My Listings</h2>
+
+  <% if(listings.length === 0){ %>
+    <p>No listings found</p>
+  <% } %>
+
+  <div class="row">
+
+    <% listings.forEach(listing => { %>
+
+      <div class="col-md-4 mb-3">
+
+        <div class="card shadow-sm">
+
+          <img src="<%= listing.images[0]?.url %>" class="card-img-top">
+
+          <div class="card-body">
+            <h5><%= listing.title %></h5>
+            <p>₹<%= listing.price %></p>
+
+            <a href="/listings/<%= listing._id %>" class="btn btn-dark btn-sm">
+              View
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    <% }) %>
+
+  </div>
+
+</div>

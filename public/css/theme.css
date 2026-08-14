@@ -1,0 +1,673 @@
+/*---theme icon ------*/
+.theme-btn {
+  font-size: 25px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  margin-left: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+
+  transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.theme-btn:hover {
+  transform: scale(1.15);
+  background: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode hover */
+body.dark .theme-btn:hover,
+body.dim .theme-btn:hover,
+body.deep .theme-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* BASE TRANSITION */
+
+body {
+  transition: all 0.3s ease;
+}
+
+/* LIGHT */
+body.light {
+  background: #ffffff;
+  color: #111;
+}
+
+/* DARK */
+body.dark {
+  background: #121212;
+  color: #eaeaea;
+}
+
+/* DIM */
+body.dim {
+  background: #2b2b2b;
+  color: #e0e0e0;
+}
+
+/* DEEP */
+body.deep {
+  background: #000;
+  color: #bbbbbb;
+}
+
+/* NAVBAR */
+
+.navbar {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.75) !important;
+}
+
+body.dark .navbar,
+body.dim .navbar,
+body.deep .navbar {
+  background: #1e1e1e !important;
+  border-bottom: 1px solid #333;
+}
+
+body.deep .navbar {
+  background: #000 !important;
+}
+
+/* LIGHT THEME NAVBAR */
+
+body.light .navbar {
+  background-color: #f8f9fa !important;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* SEARCH INPUT */
+body.dark .search-input,
+body.dim .search-input,
+body.deep .search-input {
+  background: #2a2a2a;
+  color: white;
+  border: 1px solid #444;
+}
+
+/* BUTTON */
+body.dark .btn-search,
+body.dim .btn-search,
+body.deep .btn-search {
+  background: #333;
+  color: white;
+}
+
+/* SUGGESTION BOX */
+body.dark #suggestions-box,
+body.dim #suggestions-box,
+body.deep #suggestions-box {
+  background: #1e1e1e;
+}
+
+/* SUGGESTION ITEM */
+body.dark .suggestion-item,
+body.dim .suggestion-item,
+body.deep .suggestion-item {
+  color: #eee;
+  border-bottom: 1px solid #333;
+}
+
+/* =========================
+   LISTING CARD DARK MODE
+========================= */
+
+body.dark .listing-card,
+body.dim .listing-card,
+body.deep .listing-card {
+  background: #1f1f1f;
+  border: 1px solid #333;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+body.deep .listing-card {
+  background: #0d0d0d;
+}
+
+body.dark .card-text,
+body.dim .card-text,
+body.deep .card-text {
+  color: #f1f1f1;
+}
+
+/* CARD */
+
+.listing-card {
+  transition: all 0.3s ease;
+  border-radius: 18px;
+  overflow: hidden; /* important fix */
+}
+
+/* =========================
+   CARD SHINE EFFECT
+========================= */
+
+/* ONLY INDEX PAGE CARDS */
+
+.index-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.index-card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -120%;
+
+  width: 60%;
+  height: 100%;
+
+  background: rgba(255, 255, 255, 0.25);
+
+  transform: skewX(-25deg);
+
+  transition: 0.8s;
+
+  z-index: 2;
+}
+
+.index-card:hover::before {
+  left: 130%;
+}
+
+.listing-card:hover::before {
+  left: 130%;
+}
+
+/* SHOW PAGE BUTTON FIX */
+
+.show-btns .btn {
+  border-radius: 8px !important;
+  padding: 10px 18px;
+  font-weight: 500;
+  box-shadow: none !important;
+}
+
+/* optional hover */
+
+.show-btns .btn:hover {
+  transform: scale(1.03);
+  transition: 0.2s ease;
+}
+
+/* FIX REVIEW CARD RADIUS */
+
+.card {
+  border-radius: 14px;
+}
+
+/* IMAGE */
+
+.listing-card img {
+  transition: transform 0.35s ease;
+  border-radius: 18px;
+}
+
+/* IMAGE ZOOM */
+
+.listing-card:hover img {
+  transform: scale(1.05);
+}
+
+/* CARD FLOAT EFFECT */
+
+.listing-card:hover {
+  transform: translateY(-5px);
+}
+
+/* =========================
+   FILTERS DARK MODE
+========================= */
+
+body.dark .filter,
+body.dim .filter,
+body.deep .filter {
+  color: #f1f1f1;
+}
+
+body.dark .filter i,
+body.dim .filter i,
+body.deep .filter i {
+  color: #f1f1f1;
+}
+
+body.dark .filter:hover,
+body.dim .filter:hover,
+body.deep .filter:hover {
+  color: #fe424d;
+}
+
+/* =========================
+   TAX TOGGLE DARK MODE
+========================= */
+
+body.dark .tex-toggle,
+body.dim .tex-toggle,
+body.deep .tex-toggle {
+  background: #1f1f1f;
+  border: 1px solid #444;
+  color: white;
+}
+
+/* HOVER EFFECT ONLY */
+
+.tex-toggle:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+/* =========================
+   NAVBAR LINKS
+========================= */
+
+body.dark .nav-link,
+body.dim .nav-link,
+body.deep .nav-link {
+  color: #f1f1f1 !important;
+}
+
+body.dark .navbar-brand,
+body.dim .navbar-brand,
+body.deep .navbar-brand {
+  color: #fe424d !important;
+}
+
+/* =========================
+   WISHLIST BUTTON
+========================= */
+
+body.dark .like-btn,
+body.dim .like-btn,
+body.deep .like-btn {
+  background: #2b2b2b !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================
+   SEARCH BAR PLACEHOLDER
+========================= */
+
+body.dark .search-input::placeholder,
+body.dim .search-input::placeholder,
+body.deep .search-input::placeholder {
+  color: #aaa;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+body.dark::-webkit-scrollbar,
+body.dim::-webkit-scrollbar,
+body.deep::-webkit-scrollbar {
+  width: 10px;
+}
+
+body.dark::-webkit-scrollbar-thumb,
+body.dim::-webkit-scrollbar-thumb,
+body.deep::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
+}
+
+/* =========================
+   PAGE BACKGROUND
+========================= */
+
+body.dark {
+  background: #121212;
+}
+
+body.dim {
+  background: #252525;
+}
+
+body.deep {
+  background: #000;
+}
+
+/* =========================
+   FOOTER THEMES
+========================= */
+
+body.dark .f-info,
+body.dim .f-info,
+body.deep .f-info {
+  background-color: #1a1a1a;
+  border-top: 1px solid #333;
+}
+
+/* deep theme */
+body.deep .f-info {
+  background-color: #000;
+}
+
+/* footer text */
+body.dark .f-info,
+body.dark .f-info a,
+body.dark .f-info i,
+body.dim .f-info,
+body.dim .f-info a,
+body.dim .f-info i,
+body.deep .f-info,
+body.deep .f-info a,
+body.deep .f-info i {
+  color: #f1f1f1 !important;
+}
+
+/* hover effect */
+body.dark .f-info a:hover,
+body.dim .f-info a:hover,
+body.deep .f-info a:hover {
+  color: #fe424d !important;
+}
+
+/* social icon animation */
+body.dark .f-info-socials i:hover,
+body.dim .f-info-socials i:hover,
+body.deep .f-info-socials i:hover {
+  transform: scale(1.2);
+  transition: 0.3s ease;
+}
+
+/* =========================
+    THEME EFFECT RAINY DROPS
+========================= */
+
+.light-cloud {
+  position: fixed;
+  top: -50px;
+  font-size: 28px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: lightFloat 4s linear forwards;
+}
+
+@keyframes lightFloat {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) translateX(40px);
+  }
+}
+
+/* =========================
+   DARK THEME EFFECT  RAINY DROPS
+========================= */
+
+.dark-star {
+  position: fixed;
+  top: -30px;
+  font-size: 20px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: starFall 3s linear forwards;
+}
+
+@keyframes starFall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) scale(1.5);
+  }
+}
+
+/* =========================
+   DIM THEME EFFECT  RAINY DROPS
+========================= */
+
+.dim-bubble {
+  position: fixed;
+  bottom: -30px;
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: bubbleUp 4s linear forwards;
+}
+
+@keyframes bubbleUp {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh) scale(1.6);
+  }
+}
+
+/* =========================
+   DEEP THEME EFFECT  RAINY DROPS
+========================= */
+
+/* =========================
+   DEEP THEME EFFECT
+========================= */
+
+.deep-glow {
+  position: fixed;
+
+  top: -30px;
+
+  font-size: 22px;
+
+  color: rgba(255, 255, 255, 0.95);
+
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.9),
+    0 0 18px rgba(255, 255, 255, 0.7),
+    0 0 28px rgba(255, 255, 255, 0.5);
+
+  pointer-events: none;
+
+  z-index: 9999;
+
+  animation: deepStarRain 5s linear forwards;
+}
+
+@keyframes deepStarRain {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.7) rotate(0deg);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) scale(1.6) rotate(180deg);
+  }
+}
+
+/* FIX SHOW PAGE CARD */
+
+.show-img {
+  border-radius: 0 !important;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.show-card {
+  overflow: visible !important;
+  border-radius: 14px !important;
+}
+
+/* =========================
+   DOUBLE CLICK HEART EFFECT
+========================= */
+
+.index-card {
+  position: relative;
+}
+
+.double-heart {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%) scale(0);
+
+  font-size: 90px;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: all 0.35s ease;
+
+  z-index: 20;
+}
+
+.double-heart.show {
+  opacity: 1;
+
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* =========================
+   SEPARATE HOVER EFFECTS
+========================= */
+
+/* CARD */
+
+.listing-card {
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+/* IMAGE ONLY */
+
+.listing-card img {
+  transition: transform 0.45s ease;
+}
+
+.listing-card img:hover {
+  transform: scale(1);
+}
+
+/* TEXT ONLY */
+
+.listing-card .card-body {
+  transition: all 0.35s ease;
+}
+
+.listing-card .card-body:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+/* =========================
+   SHOW PAGE MATCH INDEX PAGE
+========================= */
+
+body.dark .show-header h1,
+body.dark .show-location,
+body.dark .listing-description p,
+body.dark .price-owner p,
+body.dark .weather-header h3,
+body.dark .review-comment,
+body.dark .review-top,
+body.dark .booking-card,
+body.dark .review-box,
+body.dark .show-info-card,
+body.dark .weather-card,
+body.dark .map-card,
+body.dark .review-card,
+body.dark .all-reviews {
+  color: #f1f1f1 !important;
+}
+
+body.dim .show-header h1,
+body.dim .show-location,
+body.dim .listing-description p,
+body.dim .price-owner p,
+body.dim .weather-header h3,
+body.dim .review-comment,
+body.dim .review-top,
+body.dim .booking-card,
+body.dim .review-box,
+body.dim .show-info-card,
+body.dim .weather-card,
+body.dim .map-card,
+body.dim .review-card,
+body.dim .all-reviews {
+  color: #f1f1f1 !important;
+}
+
+body.deep .show-header h1,
+body.deep .show-location,
+body.deep .listing-description p,
+body.deep .price-owner p,
+body.deep .weather-header h3,
+body.deep .review-comment,
+body.deep .review-top,
+body.deep .booking-card,
+body.deep .review-box,
+body.deep .show-info-card,
+body.deep .weather-card,
+body.deep .map-card,
+body.deep .review-card,
+body.deep .all-reviews {
+  color: #f1f1f1 !important;
+}
+
+/* CARD COLORS */
+
+body.dark .show-info-card,
+body.dark .weather-card,
+body.dark .map-card,
+body.dark .review-card,
+body.dark .all-reviews,
+body.dark .review-box,
+body.dark .booking-card {
+  background: #1f1f1f !important;
+  border: 1px solid #333 !important;
+}
+
+body.dim .show-info-card,
+body.dim .weather-card,
+body.dim .map-card,
+body.dim .review-card,
+body.dim .all-reviews,
+body.dim .review-box,
+body.dim .booking-card {
+  background: #2f2f2f !important;
+  border: 1px solid #444 !important;
+}
+
+body.deep .show-info-card,
+body.deep .weather-card,
+body.deep .map-card,
+body.deep .review-card,
+body.deep .all-reviews,
+body.deep .review-box,
+body.deep .booking-card {
+  background: #0d0d0d !important;
+  border: 1px solid #222 !important;
+}

@@ -1,0 +1,16 @@
+
+
+
+<% if (success && success.length) { %><!-- success ak type no array chhee req.locals.success j store karayvo te chhe aa -->
+  <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert">
+    <%= success %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+<% } %>
+
+<% if (error && error.length) { %><!-- success ak type no array chhee req.locals.success j store karayvo te chhe aa -->
+  <div class="alert alert-danger alert-dismissible fade show col-6 offset-3" role="alert">
+    <%= error %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+<% } %>

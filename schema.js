@@ -1,0 +1,67 @@
+// const Joi = require("joi");
+// const { model } = require("mongoose");
+
+// module.exports.listingSchema = Joi.object({
+//   // object aavse
+//   listing: Joi.object({
+//     // e object ma listing namnij object aavi joy j joi.obj type ni hovi joy
+//     title: Joi.string().required(),
+//     description: Joi.string().required(),
+//     location: Joi.string().required(),
+//     country: Joi.string().required(),
+//     price: Joi.number().required().min(0),
+//     image: Joi.string().allow("", null),
+//   }).required(),
+// });
+
+// module.exports.reviewSchema = Joi.object({
+//   review: Joi.object({
+//     rating: Joi.number().required().min(1).max(5),
+//     comment: Joi.string().required(),
+//   }).required(),
+// });
+
+const Joi = require("joi");
+
+module.exports.listingSchema = Joi.object({
+  listing: Joi.object({
+    title: Joi.string().required(),
+
+    description: Joi.string().required(),
+
+    location: Joi.string().required(),
+
+    country: Joi.string().required(),
+
+    price: Joi.number().required().min(0),
+
+    image: Joi.string().allow("", null),
+
+    categories: Joi.string(),
+
+    // ✅ FIXED (simple lat/lng system)
+    geometry: Joi.object({
+      latitude: Joi.number().required(),
+      longitude: Joi.number().required(),
+    }).required(),
+  }).required(),
+});
+
+module.exports.reviewSchema = Joi.object({
+  review: Joi.object({
+    rating: Joi.number().required().min(1).max(5),
+    comment: Joi.string().required(),
+  }).required(),
+});
+
+module.exports.bookingSchema = Joi.object({
+  booking: Joi.object({
+    checkIn: Joi.date().required(),
+
+    checkOut: Joi.date().required(),
+
+    guests: Joi.number().min(1).required(),
+
+    totalPrice: Joi.number().required(),
+  }).required(),
+});

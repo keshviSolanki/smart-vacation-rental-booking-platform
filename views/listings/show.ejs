@@ -1,0 +1,377 @@
+<% layout("/layouts/boilerplate") %>
+
+<% let user = typeof currUser !== "undefined" ? currUser : null; %>
+
+<div class="show-page">
+
+    <!-- HEADER -->
+    <div class="show-header">
+        <h1><%= listing.title %></h1>
+
+        <p class="show-location">
+            <i class="fa-solid fa-location-dot"></i>
+            <%= listing.location %>, <%= listing.country %>
+        </p>
+    </div>
+
+    <!-- IMAGE SLIDER -->
+    <div class="show-image-container">
+
+        <div class="image-slider">
+
+            <button class="slider-btn prev-btn">❮</button>
+
+            <div class="slider-wrapper">
+
+                <% listing.images.forEach((img, index) => { %>
+
+                <img src="<%= img.url.replace('/upload', '/upload/w_1200,q_auto,f_auto') %>" loading="lazy"
+                    class="slider-image <%= index === 0 ? 'active-slide' : '' %>" />
+
+                <% }) %>
+
+            </div>
+
+            <button class="slider-btn next-btn">❯</button>
+
+        </div>
+
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="show-grid">
+
+        <!-- LEFT SECTION -->
+        <div class="left-section">
+
+            <!-- INFO CARD -->
+            <div class="show-info-card">
+
+                <div class="price-owner">
+
+                    <div>
+                        <h2>₹<%= listing.price.toLocaleString("en-IN") %></h2>
+                        <p>
+                            Hosted by <strong><%= listing.owner.username %></strong>
+                        </p>
+                    </div>
+
+                    <% if(currUser && listing.owner._id.equals(currUser._id)){ %>
+
+                    <div class="action-buttons">
+
+                        <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark">
+                            Edit
+                        </a>
+
+                        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+
+                    </div>
+
+                    <% } %>
+
+
+
+                </div>
+
+                <hr />
+
+                <div class="listing-description">
+                    <p><%= listing.description %></p>
+                </div>
+
+            </div>
+
+            <!-- REVIEW FORM -->
+            <div class="review-card">
+
+                <h3 class="mb-4">Leave a Review</h3>
+
+                <% if(typeof currUser !== "undefined" && currUser){ %>
+
+                <form action="/listings/<%= listing._id %>/reviews" method="POST">
+
+                    <fieldset class="starability-slot">
+
+                        <input type="radio" id="rate1" name="review[rating]" value="1" />
+                        <label for="rate1">1 star</label>
+
+                        <input type="radio" id="rate2" name="review[rating]" value="2" />
+                        <label for="rate2">2 stars</label>
+
+                        <input type="radio" id="rate3" name="review[rating]" value="3" />
+                        <label for="rate3">3 stars</label>
+
+                        <input type="radio" id="rate4" name="review[rating]" value="4" />
+                        <label for="rate4">4 stars</label>
+
+                        <input type="radio" id="rate5" name="review[rating]" value="5" />
+                        <label for="rate5">5 stars</label>
+
+                    </fieldset>
+                    <textarea name="review[comment]" class="form-control mt-3" rows="4" required></textarea>
+
+                    <button class="btn btn-dark mt-3">Submit Review</button>
+
+                </form>
+
+                <% } else { %>
+                <p>Please login to add review.</p>
+                <% } %>
+
+            </div>
+
+            <!-- ALL REVIEWS -->
+            <% if(listing.reviews.length > 0){ %>
+
+            <div class="all-reviews">
+
+                <h3 class="mb-4">Guest Reviews</h3>
+
+                <div class="review-grid">
+
+                    <% for(review of listing.reviews){ %>
+
+                    <div class="review-box">
+
+                        <div class="review-top">
+
+                            <h5>
+                                <i class="fa-solid fa-user"></i>
+                                <%= review.author.username %>
+                            </h5>
+
+                            <span>⭐ <%= review.rating %>/5</span>
+
+                        </div>
+
+                        <p><%= review.comment %></p>
+
+                    </div>
+
+                    <% } %>
+
+                </div>
+
+            </div>
+
+            <% } %>
+
+            <!-- WEATHER (LEFT SIDE BELOW REVIEWS) -->
+            <div class="weather-card">
+
+                <div class="weather-header">
+
+                    <h3>Current Weather</h3>
+
+                    <button class="btn btn-info weather-btn" id="weatherBtn">
+                        Show Weather
+                    </button>
+
+                </div>
+
+                <div class="weather-content" id="weatherContent" style="display:none;">
+
+                    <button class="close-weather" id="closeWeather">✕</button>
+
+                    <div class="weather-box">
+
+                        <img id="weatherIcon" src="" />
+
+                        <div>
+                            <h4 id="weatherTemp"></h4>
+                            <p id="weatherDesc"></p>
+                            <p id="weatherHumidity"></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SECTION -->
+        <div class="right-section">
+
+            <!-- ✅ BOOKING CARD (NEW) -->
+            <div class="booking-card">
+
+                <h3>Book this place</h3>
+
+                <%
+                    const gstPrice = Math.round(listing.price * 1.18);
+                %>
+
+                <p class="booking-price">
+                    <b>₹<%= gstPrice.toLocaleString("en-IN") %></b> / night
+                    <small>(incl. 18% GST)</small>
+                </p>
+
+                <form action="/bookings/<%= listing._id %>/book" method="POST">
+
+                    <input type="hidden" name="test" value="booking-test">
+
+                    <div class="mb-2">
+                        <label>Check-in</label>
+
+                        <input type="date" name="checkIn" class="form-control form-control-sm"
+                            min="<%= new Date().toISOString().split('T')[0] %>" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label>Check-out</label>
+
+                        <input type="date" name="checkOut" class="form-control form-control-sm"
+                            min="<%= new Date().toISOString().split('T')[0] %>" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label>Guests</label>
+                        <input type="number" name="guests" min="1" value="1" class="form-control form-control-sm"
+                            required>
+                    </div>
+
+                    <button class="btn btn-danger w-100 btn-sm mt-2">
+                        Reserve
+                    </button>
+
+                </form>
+
+                <p id="totalPrice" class="mt-3 fw-bold"></p>
+
+                </form>
+
+            </div>
+
+            <!-- MAP -->
+            <div class="map-card">
+
+                <h3>Property Location</h3>
+
+                <div id="show-map" data-lat="<%= listing.geometry.coordinates[1] %>"
+                    data-lng="<%= listing.geometry.coordinates[0] %>" data-title="<%= listing.title %>">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MAP SCRIPT -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const mapDiv = document.getElementById("show-map");
+
+        const lat = parseFloat(mapDiv.dataset.lat);
+        const lng = parseFloat(mapDiv.dataset.lng);
+
+        const map = L.map("show-map").setView([lat, lng], 13);
+
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors",
+        }).addTo(map);
+
+        L.marker([lat, lng]).addTo(map);
+
+    });
+</script>
+
+<!-- SLIDER + WEATHER SCRIPT -->
+<script>
+    let slides = document.querySelectorAll(".slider-image");
+    let currentSlide = 0;
+
+    function showSlide(i) {
+        slides.forEach(s => s.classList.remove("active-slide"));
+        slides[i].classList.add("active-slide");
+    }
+
+    document.querySelector(".next-btn").onclick = () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    };
+
+    document.querySelector(".prev-btn").onclick = () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    };
+
+    showSlide(currentSlide);
+
+    // WEATHER
+    const weatherBtn = document.getElementById("weatherBtn");
+    const weatherContent = document.getElementById("weatherContent");
+    const closeWeather = document.getElementById("closeWeather");
+
+    weatherBtn.addEventListener("click", async () => {
+
+        const res = await fetch("/weather/<%= listing._id %>");
+        const data = await res.json();
+
+        document.getElementById("weatherTemp").innerText = data.temp + "°C";
+        document.getElementById("weatherDesc").innerText = data.description;
+        document.getElementById("weatherHumidity").innerText = "Humidity: " + data.humidity + "%";
+        document.getElementById("weatherIcon").src =
+            "https://openweathermap.org/img/wn/" + data.icon + "@2x.png";
+
+        weatherContent.style.display = "block";
+    });
+
+    closeWeather.addEventListener("click", () => {
+        weatherContent.style.display = "none";
+    });
+
+
+    //---------------------------
+    //     booking system
+    //---------------------------
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const checkIn = document.querySelector('input[name="checkIn"]');
+        const checkOut = document.querySelector('input[name="checkOut"]');
+        const totalPriceEl = document.getElementById("totalPrice");
+
+        if (!checkIn || !checkOut || !totalPriceEl) return;
+
+        const pricePerNight = Number("<%= Math.round(listing.price * 1.18) %>");
+
+        function calculatePrice() {
+            if (checkIn.value && checkOut.value) {
+
+                const start = new Date(checkIn.value);
+                const end = new Date(checkOut.value);
+
+                const diffTime = end - start;
+                const days = diffTime / (1000 * 60 * 60 * 24);
+
+                if (days > 0) {
+                    const total = days * pricePerNight;
+                    totalPriceEl.innerText = `Total: ₹${total.toLocaleString("en-IN")}`;
+                }
+            }
+        }
+
+        checkIn.addEventListener("change", calculatePrice);
+        checkOut.addEventListener("change", calculatePrice);
+
+        // VALIDATION
+        const today = new Date().toISOString().split("T")[0];
+
+        checkIn.min = today;
+        checkOut.min = today;
+
+        checkIn.addEventListener("change", () => {
+            checkOut.min = checkIn.value;
+        });
+
+    });
+</script>

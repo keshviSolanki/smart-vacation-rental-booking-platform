@@ -1,0 +1,132 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  /* =========================
+   BACKGROUND (BLACK + PURPLE)
+========================= */
+  body {
+    background: linear-gradient(135deg, #000000, #0b0014, #1a0033);
+    min-height: 100vh;
+  }
+
+  /* =========================
+   PROFILE CARD (GLASS EFFECT)
+========================= */
+  .profile-card {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+
+    border-radius: 22px;
+
+    /* PURPLE GLASS GRADIENT */
+    background: linear-gradient(
+      135deg,
+      rgba(25, 0, 50, 0.75),
+      /* deep purple */ rgba(10, 0, 20, 0.6),
+      /* black purple */ rgba(40, 0, 80, 0.35) /* light purple glow */
+    );
+
+    /* GLASS EFFECT */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+
+    color: #ffffff;
+    text-align: center;
+
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  /* HOVER EFFECT */
+  .profile-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 18px 55px rgba(128, 0, 255, 0.25);
+  }
+
+  /* =========================
+   USER NAME
+========================= */
+  .profile-card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e9d5ff;
+  }
+
+  /* =========================
+   EMAIL
+========================= */
+  .profile-card p {
+    font-size: 14px;
+    color: #c4b5fd;
+  }
+
+  /* =========================
+   BUTTON CONTAINER
+========================= */
+  .profile-actions {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* =========================
+   BUTTON BASE
+========================= */
+  .profile-actions a {
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    color: #fff;
+    border: 1px solid transparent;
+  }
+
+  /* =========================
+   MY LISTINGS BUTTON
+========================= */
+  .btn-listings {
+    background: linear-gradient(135deg, #2e1065, #1e1b4b);
+    border: 1px solid #6d28d9;
+  }
+
+  /* =========================
+   BOOKING REQUEST BUTTON
+========================= */
+  .btn-bookings {
+    background: linear-gradient(135deg, #1e1b4b, #0f0a1f);
+    border: 1px solid #7c3aed;
+  }
+
+  /* =========================
+   HOVER EFFECT (NEON GLOW)
+========================= */
+  .profile-actions a:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+    border-color: #a855f7;
+  }
+</style>
+
+<div class="profile-card">
+  <!-- USER INFO -->
+  <h2><%= currUser.username %></h2>
+  <p><%= currUser.email %></p>
+
+  <!-- ACTION BUTTONS -->
+  <div class="profile-actions">
+    <a href="/profile/my-listings" class="btn-listings"> 🏠 My Listings </a>
+
+    <a href="/profile/booking-requests" class="btn-bookings">
+      📥 Booking Requests
+    </a>
+
+    <!-- NEW: USER BOOKINGS -->
+    <a href="/profile/my-bookings" class="btn-bookings"> 🎟️ My Bookings </a>
+  </div>
+</div>

@@ -1,0 +1,232 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row">
+  <div class="col-8 offset-2">
+    <h2>Create a New Listing :</h2>
+    <br /><br />
+
+    <form
+      method="post"
+      action="/listings"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
+      <!-- TITLE -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+
+        <input
+          name="listing[title]"
+          placeholder="Enter title"
+          type="text"
+          class="form-control"
+          required
+        />
+
+        <div class="invalid-feedback">Please enter a title</div>
+      </div>
+
+      <!-- DESCRIPTION -->
+      <div class="mb-3">
+        <label for="description" class="form-label"> Description </label>
+
+        <textarea
+          name="listing[description]"
+          placeholder="Enter description"
+          class="form-control"
+          required
+        ></textarea>
+
+        <div class="invalid-feedback">Please enter a description</div>
+      </div>
+
+      <!-- IMAGE -->
+      <div class="mb-3" id="imageContainer">
+        <label for="image" class="form-label"> Upload Images </label>
+
+        <input
+          name="listing[images]"
+          type="file"
+          class="form-control"
+          multiple
+          required
+        />
+
+        <br />
+
+        <button type="button" id="addImageBtn" class="btn btn-secondary">
+          + Add another image
+        </button>
+      </div>
+      <br />
+
+      <!-- PRICE + COUNTRY -->
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label"> Price </label>
+
+          <input
+            name="listing[price]"
+            placeholder="Enter price"
+            required
+            class="form-control"
+          />
+
+          <div class="invalid-feedback">Please enter a price</div>
+        </div>
+
+        <div class="mb-3 col-md-8">
+          <label for="country" class="form-label"> Country </label>
+
+          <input
+            name="listing[country]"
+            placeholder="Enter country"
+            required
+            type="text"
+            class="form-control"
+          />
+
+          <div class="invalid-feedback">Please enter a country</div>
+        </div>
+      </div>
+
+      <!-- LOCATION -->
+      <div class="mb-3">
+        <label for="location" class="form-label"> Location </label>
+
+        <input
+          name="listing[location]"
+          placeholder="Enter location"
+          required
+          type="text"
+          class="form-control"
+        />
+
+        <div class="invalid-feedback">Please enter a location</div>
+      </div>
+
+      <!-- hidden coordinates -->
+
+      <div class="row mb-3">
+        <div class="col">
+          <label>Latitude</label>
+
+          <input
+            type="text"
+            name="listing[geometry][latitude]"
+            id="latitude"
+            class="form-control"
+            readonly
+          />
+        </div>
+
+        <div class="col">
+          <label>Longitude</label>
+
+          <input
+            type="text"
+            name="listing[geometry][longitude]"
+            id="longitude"
+            class="form-control"
+            readonly
+          />
+        </div>
+      </div>
+
+      <!-- MAP SECTION -->
+      <div class="mb-3">
+        <label class="form-label"> Select Property Location </label>
+
+        <small class="text-muted d-block mb-2">
+          Click on the map to select exact property location
+        </small>
+
+        <div id="map"></div>
+      </div>
+
+      <!-- CATEGORIES -->
+      <label for="category">Select Category</label>
+
+      <select name="listing[categories]" id="category" class="form-select">
+        <option value="trending">Trending</option>
+
+        <option value="rooms">Rooms</option>
+
+        <option value="doms">Doms</option>
+
+        <option value="iconic-cities">Iconic Cities</option>
+
+        <option value="boats">Boats</option>
+
+        <option value="pools">Amazing Pool</option>
+
+        <option value="mountains">Mountains</option>
+
+        <option value="castles">Castles</option>
+
+        <option value="camping">Camping</option>
+
+        <option value="farms">Farms</option>
+
+        <option value="snow">Snow</option>
+      </select>
+
+      <br /><br />
+
+      <button type="submit" class="btn btn-dark add-btn">Add</button>
+
+      <br /><br />
+    </form>
+  </div>
+</div>
+
+<!-- LEAFLET MAP SCRIPT -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const latitudeInput = document.getElementById("latitude");
+
+    const longitudeInput = document.getElementById("longitude");
+
+    const map = L.map("map").setView([20.5937, 78.9629], 5);
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors",
+    }).addTo(map);
+
+    let marker;
+
+    map.on("click", (e) => {
+      const lat = e.latlng.lat;
+
+      const lng = e.latlng.lng;
+
+      // save values
+      latitudeInput.value = lat;
+
+      longitudeInput.value = lng;
+
+      console.log("Saved:", lat, lng);
+
+      // remove old marker
+      if (marker) {
+        map.removeLayer(marker);
+      }
+
+      // add marker
+      marker = L.marker([lat, lng]).addTo(map);
+    });
+  });
+
+  //-----------add other image button ---------------
+  document.getElementById("addImageBtn").addEventListener("click", () => {
+    const container = document.getElementById("imageContainer");
+
+    const input = document.createElement("input");
+    input.type = "file";
+    input.name = "listing[images]";
+    input.className = "form-control mb-2";
+
+    container.appendChild(input);
+  });
+</script>

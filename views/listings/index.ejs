@@ -1,0 +1,307 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  /* FILTERS */
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer;
+
+  }
+
+  .filter p {
+    font-size: 0.8rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  /* CARD */
+  .listing-card {
+    position: relative;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .card-img-top {
+    object-fit: cover;
+    height: 20rem;
+  }
+
+  /* WISHLIST */
+  .wishlist-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+  }
+
+  .like-btn {
+    border: none !important;
+    background: white !important;
+    width: 45px;
+    height: 45px;
+    border-radius: 50% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
+  .like-btn i {
+    font-size: 1.2rem;
+    color: #ff385c;
+  }
+
+  .fa-solid.fa-heart {
+    color: #ff385c !important;
+  }
+
+  .fa-regular.fa-heart {
+    color: #ff385c !important;
+  }
+
+
+  /*tax-valu-box */
+  .tex-toggle {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-top: 1.5rem;
+    transition: 0.2s ease;
+  }
+
+  .tex-toggle:hover {
+    border-color: #030303;
+    box-shadow: 0 4px 12px rgba(38, 36, 36, 0.15);
+  }
+</style>
+
+<!-- FILTERS -->
+<div id="filters">
+  <a href="/listings/category/trending" class="filter">
+    <div><i class="fa-solid fa-fire"></i></div>
+    <p>Trending</p>
+  </a>
+
+  <a href="/listings/category/rooms" class="filter">
+    <div><i class="fa-solid fa-bed"></i></div>
+    <p>Rooms</p>
+  </a>
+
+  <a href="/listings/category/doms" class="filter">
+    <div><i class="fa-solid fa-igloo"></i></div>
+    <p>doms</p>
+  </a>
+
+  <a href="/listings/category/iconic-cities" class="filter">
+    <div><i class="fa-solid fa-city"></i></div>
+    <p>Iconic cities</p>
+  </a>
+
+  <a href="/listings/category/boats" class="filter">
+    <div><i class="fa-solid fa-sailboat"></i></div>
+    <p>boats</p>
+  </a>
+
+  <a href="/listings/category/pools" class="filter">
+    <div><i class="fa-solid fa-person-swimming"></i></div>
+    <p>Amaizing Pool</p>
+  </a>
+
+  <a href="/listings/category/mountains" class="filter">
+    <div><i class="fa-solid fa-mountain"></i></div>
+    <p>Mountains</p>
+  </a>
+
+  <a href="/listings/category/castles" class="filter">
+    <div><i class="fa-brands fa-fort-awesome"></i></div>
+    <p>Castels</p>
+  </a>
+
+  <a href="/listings/category/camping" class="filter">
+    <div><i class="fa-solid fa-campground"></i></div>
+    <p>camping</p>
+  </a>
+
+  <a href="/listings/category/farms" class="filter">
+    <div><i class="fa-solid fa-tractor"></i></div>
+    <p>farms</p>
+  </a>
+
+  <a href="/listings/category/snow" class="filter">
+    <div><i class="fa-solid fa-snowflake"></i></div>
+    <p>snow</p>
+  </a>
+
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <div class="tex-toggle">
+    <div class="form-check-reverse form-switch ">
+      <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+      <label class="form-check-label" for="switchCheckDefault">Display total with 18% GST</label>
+    </div>
+  </div>
+
+</div>
+
+<!-- LISTINGS GRID -->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2">
+
+  <% for(let listing of alllistings) { %>
+
+  <div class="col">
+    <a href="/listings/<%= listing._id %>" class="listing-link">
+      <div class="card listing-card h-100 index-card">
+
+        <!-- IMAGE LINK ONLY -->
+        <img src="<%= listing.images[0].url.replace('/upload', '/upload/w_500,q_auto,f_auto') %>"
+          class="card-img-top listing-img" loading="lazy" />
+
+        <div class="double-heart">❤️</div>
+
+        <!-- WISHLIST BUTTON -->
+        <div class="wishlist-icon">
+          <button class="like-btn wishlist-btn" data-id="<%= listing._id %>">
+
+            <% if(currUser && currUser.wishlist && currUser.wishlist.includes(listing._id.toString())) { %>
+            <i class="fa-solid fa-heart"></i>
+            <% } else { %>
+            <i class="fa-regular fa-heart"></i>
+            <% } %>
+
+          </button>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="card-body">
+          <p class="card-text">
+            <b><%= listing.title %></b><br>
+            <span class="base-price">
+              ₹<%= listing.price.toLocaleString("en-IN") %>
+            </span>
+
+            <span class="tax-price" style="display:none">
+              ₹<%= Math.round(listing.price * 1.18).toLocaleString("en-IN") %>
+            </span>
+
+            /night
+          </p>
+        </div>
+
+      </div>
+    </a>
+
+  </div>
+
+  <% } %>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+  // WISHLIST AJAX
+  document.querySelectorAll(".wishlist-btn").forEach(btn => {
+    btn.addEventListener("click", async (e) => {
+      e.preventDefault(); // This stops default browser behavior (form/link navigation)
+      e.stopPropagation(); // Prevents card click from opening listing page
+
+      const id = btn.dataset
+        .id; //dataset = “hidden data inside HTML tag,, custom data =data-id="123" so that reson we use this to access id ”
+
+      const res = await fetch(`/listings/wishlist/toggle/${id}`, {
+        method: "POST"
+      });
+
+      // ❗ if not logged in
+      if (res.status === 401) {
+        alert("You are not logged in. Please login first.");
+        window.location.href = "/login";
+        return;
+      }
+
+      const data = await res.json();
+
+      const icon = btn.querySelector("i");
+
+      if (data.added) {
+        icon.classList.remove(
+          "fa-regular"
+        ); //icon.classList.remove(...) is a JavaScript DOM method used to remove a CSS class from an HTML element.
+        icon.classList.add("fa-solid");
+      } else {
+        icon.classList.remove("fa-solid");
+        icon.classList.add("fa-regular");
+      }
+    });
+  });
+
+
+  /* =========================
+   DOUBLE CLICK LIKE
+========================= */
+
+  const listingImages = document.querySelectorAll(".listing-img");
+
+  listingImages.forEach((img) => {
+
+    img.addEventListener("dblclick", () => {
+
+      const card = img.closest(".index-card");
+
+      const heart = card.querySelector(".double-heart");
+
+      heart.classList.add("show");
+
+      setTimeout(() => {
+        heart.classList.remove("show");
+      }, 700);
+
+    });
+
+  });
+
+  //show price with text 
+  const taxSwitch = document.getElementById("switchCheckDefault");
+
+taxSwitch.addEventListener("change", () => {
+
+  const basePrices = document.querySelectorAll(".base-price");
+  const taxPrices = document.querySelectorAll(".tax-price");
+
+  if (taxSwitch.checked) {
+
+    basePrices.forEach(el => el.style.display = "none");
+
+    taxPrices.forEach(el => el.style.display = "inline");
+
+  } else {
+
+    basePrices.forEach(el => el.style.display = "inline");
+
+    taxPrices.forEach(el => el.style.display = "none");
+
+  }
+
+});
+</script>
