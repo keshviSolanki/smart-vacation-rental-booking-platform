@@ -1,4 +1,5 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
 
 const express = require("express");
 const app = express();
@@ -7,7 +8,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-
+const sessionSecret = process.env.SESSION_SECRET;
 const expressError = require("./utility/expressError.js");
 
 const session = require("express-session");
@@ -32,7 +33,10 @@ const profileRoutes = require("./routes/profile.js");
 // =========================
 // DATABASE
 // =========================
-const mongo_url = "mongodb://127.0.0.1:27017/wanderlust";
+// Fix MongoDB Atlas DNS issue (optional)
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+const mongo_url = process.env.MONGO_URL;
 
 mongoose
   .connect(mongo_url)
@@ -59,7 +63,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const store = MongoStore.create({
   mongoUrl: mongo_url,
   crypto: {
-    secret: "mysupersecret",
+    secret: sessionSecret,
   },
   touchAfter: 24 * 3600,
 });
@@ -70,7 +74,7 @@ const store = MongoStore.create({
 app.use(
   session({
     store,
-    secret: "mysupersecret",
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -133,6 +137,8 @@ app.use((err, req, res, next) => {
 // =========================
 // SERVER
 // =========================
-app.listen(8080, () => {
-  console.log("app is listening on port 8080");
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log(`app is listening on port ${PORT}`);
 });
