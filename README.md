@@ -6,13 +6,7 @@
 
 ### 🌐 Live Website
 
-**[Visit the Live Website → ADD YOUR LIVE LINK HERE]**
-
-### ⚙️ Backend API
-
-**[Backend API → ADD YOUR BACKEND LIVE LINK HERE]**
-
----
+https://smart-vacation-rental-booking-platform.onrender.com/listings
 
 ## 📖 About The Project
 
