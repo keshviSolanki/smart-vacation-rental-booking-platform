@@ -307,7 +307,7 @@ The main goals of this project were to:
 
 Full Stack Developer interested in building scalable web applications and AI-powered systems.
 
-**GitHub:** https://smart-vacation-rental-booking-platform.onrender.com/listings
+**GitHub:** https://github.com/keshviSolanki/smart-vacation-rental-booking-platform/tree/main
 
 ---
 
