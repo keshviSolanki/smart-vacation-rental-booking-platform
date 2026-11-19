@@ -5,6 +5,8 @@ const express = require("express");
 const app = express();
 
 const mongoose = require("mongoose");
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");

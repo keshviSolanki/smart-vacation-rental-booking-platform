@@ -1,473 +1,409 @@
-// const sampleListings = [
-//   {
-//     title: "Cozy Beachfront Cottage",
-//     description:
-//       "Escape to this charming beachfront cottage for a relaxing getaway. Enjoy stunning ocean views and easy access to the beach.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 1500,
-//     location: "Malibu",
-//     country: "United States",
-//     categories: "trending",
-//   },
-
-//   {
-//     title: "Modern Loft in Downtown",
-//     description:
-//       "Stay in the heart of the city in this stylish loft apartment.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 1200,
-//     location: "New York City",
-//     country: "United States",
-//     categories: "iconic-cities",
-//   },
-
-//   {
-//     title: "Mountain Retreat",
-//     description: "Unplug and unwind in this peaceful mountain cabin.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 1000,
-//     location: "Aspen",
-//     country: "United States",
-//     categories: "mountains",
-//   },
-
-//   {
-//     title: "Historic Villa in Tuscany",
-//     description:
-//       "Experience the charm of Tuscany in this beautifully restored villa.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 2500,
-//     location: "Florence",
-//     country: "Italy",
-//     categories: "castles",
-//   },
-
-//   {
-//     title: "Secluded Treehouse Getaway",
-//     description: "Live among the treetops in this unique treehouse retreat.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 800,
-//     location: "Portland",
-//     country: "United States",
-//     categories: "camping",
-//   },
-
-//   {
-//     title: "Beachfront Paradise",
-//     description: "Step out of your door onto the sandy beach.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 2000,
-//     location: "Cancun",
-//     country: "Mexico",
-//     categories: "pools",
-//   },
-
-//   {
-//     title: "Rustic Cabin by the Lake",
-//     description: "Spend your days fishing and kayaking on the serene lake.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 900,
-//     location: "Lake Tahoe",
-//     country: "United States",
-//     categories: "mountains",
-//   },
-
-//   {
-//     title: "Luxury Penthouse with City Views",
-//     description: "Indulge in luxury living with panoramic city views.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 3500,
-//     location: "Los Angeles",
-//     country: "United States",
-//     categories: "rooms",
-//   },
-
-//   {
-//     title: "Ski-In/Ski-Out Chalet",
-//     description: "Hit the slopes right from your doorstep.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 3000,
-//     location: "Verbier",
-//     country: "Switzerland",
-//     categories: "snow",
-//   },
-
-//   {
-//     title: "Safari Lodge in the Serengeti",
-//     description: "Experience the thrill of the wild in a safari lodge.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 4000,
-//     location: "Serengeti National Park",
-//     country: "Tanzania",
-//     categories: "trending",
-//   },
-
-//   {
-//     title: "Historic Canal House",
-//     description: "Stay in a piece of history in Amsterdam.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 1800,
-//     location: "Amsterdam",
-//     country: "Netherlands",
-//     categories: "iconic-cities",
-//   },
-
-//   {
-//     title: "Private Island Retreat",
-//     description: "Have an entire island to yourself.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1618140052121-39fc6db33972?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 10000,
-//     location: "Fiji",
-//     country: "Fiji",
-//     categories: "boats",
-//   },
-
-//   {
-//     title: "Beachfront Bungalow in Bali",
-//     description: "Relax on the sandy shores of Bali.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1602391833977-358a52198938?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 1800,
-//     location: "Bali",
-//     country: "Indonesia",
-//     categories: "pools",
-//   },
-
-//   {
-//     title: "Mountain View Cabin in Banff",
-//     description: "Enjoy breathtaking mountain views.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1521401830884-6c03c1c87ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 1500,
-//     location: "Banff",
-//     country: "Canada",
-//     categories: "mountains",
-//   },
-
-//   {
-//     title: "Historic Castle in Scotland",
-//     description: "Live like royalty in this historic castle.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1585543805890-6051f7829f98?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 4000,
-//     location: "Scottish Highlands",
-//     country: "United Kingdom",
-//     categories: "castles",
-//   },
-
-//   {
-//     title: "Rustic Log Cabin in Montana",
-//     description: "Unplug and unwind in this cozy log cabin.",
-//     image: {
-//       filename: "listingimage",
-//       url: "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-//     },
-//     price: 1100,
-//     location: "Montana",
-//     country: "United States",
-//     categories: "farms",
-//   },
-//   {
-//     title: "Premium Room gujrat",
-//     description: "Minimal premium room perfect for business travelers.",
-//     images: [
-//       {
-//         filename: "listingimage",
-//         url: "https://images.unsplash.com/photo-1484154218962-a197022b5858",
-//       },
-//       {
-//         filename: "listingimage",
-//         url: "https://images.unsplash.com/photo-1494526585095-c41746248156",
-//       },
-//       {
-//         filename: "listingimage",
-//         url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-//       },
-//     ],
-//     price: 2600,
-//     location: "Bengaluru",
-//     country: "India",
-//     categories: "rooms",
-//     geometry: { type: "Point", coordinates: [77.5946, 12.9716] },
-//   },
-// ];
-
-// module.exports = { data: sampleListings };
-
 const sampleListings = [
   {
-    title: "Luxury Palace Stay",
+    title: "Oceanview Villa with Infinity Pool",
     description:
-      "Experience royal luxury in this beautiful heritage palace stay.",
+      "Luxury villa with beautiful sea views, private infinity pool and spacious rooms.",
     images: [
       {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+        url: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+        filename: "villa1",
       },
     ],
-    price: 4500,
-    location: "Udaipur",
-    country: "India",
-    categories: "castles",
-    geometry: { type: "Point", coordinates: [73.7125, 24.5854] },
-  },
-  {
-    title: "Beach Resort Goa",
-    description: "Enjoy relaxing beach vibes and nightlife near the sea.",
-    images: [
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
-      },
-    ],
-    price: 3200,
-    location: "Goa",
-    country: "India",
+    price: 420,
+    location: "Uluwatu",
+    country: "Indonesia",
     categories: "pools",
-    geometry: { type: "Point", coordinates: [74.124, 15.2993] },
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [115.0866, -8.829] },
   },
   {
-    title: "Mountain Cabin Manali",
-    description: "Peaceful wooden cabin surrounded by snowy mountains.",
+    title: "Cozy Alpine Cabin",
+    description:
+      "Beautiful wooden cabin surrounded by pine trees and mountain views.",
     images: [
       {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
+        url: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+        filename: "cabin1",
       },
     ],
-    price: 2800,
+    price: 185,
+    location: "Zermatt",
+    country: "Switzerland",
+    categories: "mountains",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [7.7491, 46.0207] },
+  },
+  {
+    title: "Modern Downtown Loft",
+    description:
+      "Modern apartment near cafes, restaurants and city attractions.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+        filename: "loft1",
+      },
+    ],
+    price: 160,
+    location: "New York",
+    country: "United States",
+    categories: "iconic-cities",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [-73.9857, 40.7484] },
+  },
+  {
+    title: "Lakefront Glass House",
+    description: "Peaceful glass house overlooking a beautiful lake.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=80",
+        filename: "lake1",
+      },
+    ],
+    price: 310,
+    location: "Queenstown",
+    country: "New Zealand",
+    categories: "trending",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [168.6626, -45.0312] },
+  },
+  {
+    title: "Traditional Kyoto Machiya",
+    description: "Traditional Japanese wooden house with a peaceful courtyard.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+        filename: "kyoto1",
+      },
+    ],
+    price: 205,
+    location: "Kyoto",
+    country: "Japan",
+    categories: "iconic-cities",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [135.7681, 35.0116] },
+  },
+  {
+    title: "Private Beach Bungalow",
+    description: "Beautiful beach bungalow with hammock and outdoor shower.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+        filename: "beach1",
+      },
+    ],
+    price: 145,
+    location: "Nusa Penida",
+    country: "Indonesia",
+    categories: "rooms",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [115.5444, -8.7278] },
+  },
+  {
+    title: "Countryside Stone Cottage",
+    description: "Traditional stone cottage with garden and walking trails.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=80",
+        filename: "cottage1",
+      },
+    ],
+    price: 175,
+    location: "Cotswolds",
+    country: "United Kingdom",
+    categories: "farms",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [-1.8433, 51.833] },
+  },
+  {
+    title: "Sailboat Stay in Harbor",
+    description:
+      "Unique overnight experience aboard a comfortable sailing boat.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+        filename: "boat1",
+      },
+    ],
+    price: 130,
+    location: "Amsterdam",
+    country: "Netherlands",
+    categories: "boats",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [4.9041, 52.3676] },
+  },
+  {
+    title: "Desert Design Retreat",
+    description: "Minimalist desert home with warm interiors and scenic views.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+        filename: "desert1",
+      },
+    ],
+    price: 260,
+    location: "Joshua Tree",
+    country: "United States",
+    categories: "trending",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [-116.3131, 34.1347] },
+  },
+  {
+    title: "Snowy Mountain Chalet",
+    description:
+      "Luxury chalet with fireplace and beautiful snowy mountain views.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+        filename: "snow1",
+      },
+    ],
+    price: 350,
+    location: "Chamonix",
+    country: "France",
+    categories: "snow",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [6.8694, 45.9237] },
+  },
+  {
+    title: "Riverside Boutique Apartment",
+    description: "Modern apartment with beautiful river views.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+        filename: "river1",
+      },
+    ],
+    price: 190,
+    location: "Prague",
+    country: "Czech Republic",
+    categories: "iconic-cities",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [14.4378, 50.0755] },
+  },
+  {
+    title: "Tropical Garden Guesthouse",
+    description: "Peaceful guesthouse surrounded by lush tropical gardens.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+        filename: "garden1",
+      },
+    ],
+    price: 95,
+    location: "Canggu",
+    country: "Indonesia",
+    categories: "rooms",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [115.1385, -8.6478] },
+  },
+  {
+    title: "Clifftop Castle Suite",
+    description: "Historic castle stay with beautiful countryside views.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80",
+        filename: "castle1",
+      },
+    ],
+    price: 480,
+    location: "Edinburgh",
+    country: "United Kingdom",
+    categories: "castles",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [-3.1883, 55.9533] },
+  },
+  {
+    title: "Farmhouse Among the Vines",
+    description: "Beautiful farmhouse surrounded by vineyards.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=80",
+        filename: "farm1",
+      },
+    ],
+    price: 225,
+    location: "Tuscany",
+    country: "Italy",
+    categories: "farms",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [11.2558, 43.7696] },
+  },
+  {
+    title: "Overwater Lagoon Villa",
+    description: "Private luxury villa above crystal clear turquoise water.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+        filename: "villa2",
+      },
+    ],
+    price: 690,
+    location: "Bora Bora",
+    country: "French Polynesia",
+    categories: "pools",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [-151.7415, -16.5004] },
+  },
+  {
+    title: "Forest A-Frame Hideaway",
+    description: "Cozy wooden A-frame cabin surrounded by forest.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+        filename: "forest1",
+      },
+    ],
+    price: 155,
+    location: "Asheville",
+    country: "United States",
+    categories: "camping",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [-82.5515, 35.5951] },
+  },
+  {
+    title: "Bright Family Home with Garden",
+    description: "Comfortable family home with a sunny private garden.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+        filename: "family1",
+      },
+    ],
+    price: 210,
+    location: "Melbourne",
+    country: "Australia",
+    categories: "rooms",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [144.9631, -37.8136] },
+  },
+  {
+    title: "Harbor View Penthouse",
+    description: "Modern penthouse with terrace and waterfront views.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+        filename: "penthouse1",
+      },
+    ],
+    price: 390,
+    location: "Sydney",
+    country: "Australia",
+    categories: "iconic-cities",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [151.2093, -33.8688] },
+  },
+  {
+    title: "Rustic Mountain Farm Stay",
+    description: "Peaceful farm stay with fresh air and mountain views.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=80",
+        filename: "farm2",
+      },
+    ],
+    price: 140,
     location: "Manali",
     country: "India",
     categories: "mountains",
+    owner: "6afec9d07cd5063dbdb25488",
     geometry: { type: "Point", coordinates: [77.1892, 32.2432] },
   },
   {
-    title: "Modern Apartment Mumbai",
-    description: "Stylish apartment with stunning skyline and sea views.",
+    title: "Private Pool Courtyard Home",
+    description: "Beautiful courtyard home with a private swimming pool.",
     images: [
       {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1494526585095-c41746248156",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1484154218962-a197022b5858",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+        url: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+        filename: "pool1",
       },
     ],
-    price: 5000,
-    location: "Mumbai",
-    country: "India",
-    categories: "iconic-cities",
-    geometry: { type: "Point", coordinates: [72.8777, 19.076] },
-  },
-  {
-    title: "Camping Tent Rishikesh",
-    description: "Adventure camping near river with bonfire and rafting.",
-    images: [
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-      },
-    ],
-    price: 1800,
-    location: "Rishikesh",
-    country: "India",
-    categories: "camping",
-    geometry: { type: "Point", coordinates: [78.2676, 30.0869] },
-  },
-  {
-    title: "Snow Resort Kashmir",
-    description: "Enjoy snowfall and beautiful valleys in luxury resort.",
-    images: [
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b",
-      },
-    ],
-    price: 4200,
-    location: "Srinagar",
-    country: "India",
-    categories: "snow",
-    geometry: { type: "Point", coordinates: [74.7973, 34.0837] },
-  },
-  {
-    title: "Lake Boat House Kerala",
-    description:
-      "Beautiful floating houseboat experience in Kerala backwaters.",
-    images: [
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-      },
-    ],
-    price: 3500,
-    location: "Alleppey",
-    country: "India",
-    categories: "boats",
-    geometry: { type: "Point", coordinates: [76.3388, 9.4981] },
-  },
-  {
-    title: "Farm Stay Punjab",
-    description: "Traditional farm stay experience with organic food.",
-    images: [
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1",
-      },
-    ],
-    price: 2100,
-    location: "Amritsar",
-    country: "India",
-    categories: "farms",
-    geometry: { type: "Point", coordinates: [74.8723, 31.634] },
-  },
-  {
-    title: "Trending Luxury Villa Jaipur",
-    description: "Luxury villa with pool and royal interior design.",
-    images: [
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1494526585095-c41746248156",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-      },
-    ],
-    price: 6200,
+    price: 275,
     location: "Jaipur",
     country: "India",
-    categories: "trending",
+    categories: "pools",
+    owner: "6afec9d07cd5063dbdb25488",
     geometry: { type: "Point", coordinates: [75.7873, 26.9124] },
   },
   {
-    title: "Premium Room Bengaluru",
-    description: "Minimal premium room perfect for business travelers.",
+    title: "Minimalist City Studio",
+    description: "Modern studio apartment with fast Wi-Fi and city access.",
     images: [
       {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1484154218962-a197022b5858",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1494526585095-c41746248156",
-      },
-      {
-        filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+        url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+        filename: "studio1",
       },
     ],
-    price: 2600,
-    location: "Bengaluru",
+    price: 105,
+    location: "Ahmedabad",
     country: "India",
     categories: "rooms",
-    geometry: { type: "Point", coordinates: [77.5946, 12.9716] },
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [72.5714, 23.0225] },
+  },
+  {
+    title: "Seaside Family Villa",
+    description: "Spacious villa with balcony and beautiful coastal views.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+        filename: "sea1",
+      },
+    ],
+    price: 240,
+    location: "Goa",
+    country: "India",
+    categories: "trending",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [73.8278, 15.4909] },
+  },
+  {
+    title: "Hilltop Cabin with Panoramic Views",
+    description: "Secluded cabin with panoramic views across rolling hills.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+        filename: "hill1",
+      },
+    ],
+    price: 195,
+    location: "Lonavala",
+    country: "India",
+    categories: "camping",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [73.4062, 18.7546] },
+  },
+  {
+    title: "Floating House on the Backwaters",
+    description: "Beautiful floating stay overlooking Kerala backwaters.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+        filename: "boat2",
+      },
+    ],
+    price: 220,
+    location: "Alappuzha",
+    country: "India",
+    categories: "boats",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [76.3388, 9.4981] },
+  },
+  {
+    title: "Snow Valley Wooden Retreat",
+    description: "Cozy wooden retreat surrounded by snowy mountain peaks.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80",
+        filename: "snow2",
+      },
+    ],
+    price: 230,
+    location: "Srinagar",
+    country: "India",
+    categories: "snow",
+    owner: "6afec9d07cd5063dbdb25488",
+    geometry: { type: "Point", coordinates: [74.7973, 34.0837] },
   },
 ];
+
 module.exports = { data: sampleListings };

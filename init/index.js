@@ -1,27 +1,31 @@
-//data base ma initilize krvanu kam kre pachhd thi vadhu kaik data add krvo hoy to 
-
 const mongoose = require("mongoose");
-const initdata = require("./data.js");
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
+const dotenv = require("dotenv");
+
+dotenv.config({
+  path: require("path").join(__dirname, "../.env"),
+});
+
 const Listing = require("../models/listing.js");
-const mongo_url = "mongodb://127.0.0.1:27017/wanderlust";
+const initData = require("./data.js");
 
-main().then(() => {
-    console.log("connected to db");
-}).catch(err => {
-    console.log(err);
-})
+const MONGO_URL = process.env.MONGO_URL;
 
-async function main() {
-    await mongoose.connect(mongo_url);
+async function initDB() {
+  try {
+    await mongoose.connect(MONGO_URL);
+    console.log("Connected to MongoDB");
+
+    await Listing.insertMany(initData.data);
+
+    console.log("25 sample listings inserted successfully!");
+  } catch (err) {
+    console.log("Database seeding error:", err);
+  } finally {
+    await mongoose.connection.close();
+  }
 }
 
-const initDB = async () => {
-    await Listing.deleteMany({});
-    initdata.data = initdata.data.map( (obj) => ({ ...obj, owner: "69a06f0ccd2f1f3ddf05db5a"}) ); // badhi obj ma ower id set kri -- map fuction old array ma change na kre new array banavse and return krse
-    await Listing.insertMany(initdata.data);  
-    console.log("data was initilizes");
-};
-
 initDB();
-
-
